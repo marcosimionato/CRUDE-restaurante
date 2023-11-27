@@ -16,10 +16,10 @@ app.use(cors());
 app.post("/register", (req, res) => {
   const { name } = req.body;
   const { cost } = req.body;
-  const { sabor } = req.body;
+  const { category } = req.body;
 
-  let mysql = "INSERT INTO games ( name, cost, sabor) VALUES (?, ?, ?)";
-  db.query(mysql, [name, cost, sabor], (err, result) => {
+  let mysql = "INSERT INTO games ( name, cost, category) VALUES (?, ?, ?)";
+  db.query(mysql, [name, cost, category], (err, result) => {
     res.send(result);
   });
 });
@@ -27,11 +27,11 @@ app.post("/register", (req, res) => {
 app.post("/search", (req, res) => {
   const { name } = req.body;
   const { cost } = req.body;
-  const { sabor } = req.body;
+  const { category } = req.body;
 
-  let mysql =
-    "SELECT * from games WHERE name = ? AND cost = ? AND sabor = ?";
-  db.query(mysql, [name, cost, sabor], (err, result) => {
+  let mysql = 
+    "SELECT * from games WHERE name = ? AND cost = ? AND category = ?";
+  db.query(mysql, [name, cost, category], (err, result) => {
     if (err) res.send(err);
     res.send(result);
   });
@@ -52,9 +52,9 @@ app.put("/edit", (req, res) => {
   const { id } = req.body;
   const { name } = req.body;
   const { cost } = req.body;
-  const { sabor } = req.body;
-  let mysql = "UPDATE games SET name = ?, cost = ?, sabor = ? WHERE id = ?";
-  db.query(mysql, [name, cost, sabor, id], (err, result) => {
+  const { category } = req.body;
+  let mysql = "UPDATE games SET name = ?, cost = ?, category = ? WHERE id = ?";
+  db.query(mysql, [name, cost, category, id], (err, result) => {
     if (err) {
       res.send(err);
     } else {
